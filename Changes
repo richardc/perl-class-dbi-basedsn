@@ -1,0 +1,6 @@
+head
+	Check that it's the thing we were importing that went boom,
+	not something *it* was importing. (rt.cpan.org #3982)
+
+1.21	9th June, 2003
+	Initial CPAN release
