@@ -2,7 +2,7 @@ use strict;
 use Module::Build;
 
 Module::Build
-  ->new( module_name => "Class::DBI::AutoBase",
+  ->new( module_name => "Class::DBI::BaseDSN",
          license     => 'perl',
          requires    => {
              'Test::More' => 0,

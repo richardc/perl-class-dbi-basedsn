@@ -1,5 +1,5 @@
 use strict;
-package Class::DBI::AutoBase;
+package Class::DBI::BaseDSN;
 use vars qw($VERSION);
 $VERSION = '1.21';
 
@@ -40,27 +40,27 @@ __END__
 
 =head1 NAME
 
-Class::DBI::AutoBase - automatically set your base class to reflect the database you specified
+Class::DBI::BaseDSN - DSN sensitive base class
 
 =head1 SYNOPSIS
 
   package My::DBI;
-  use base 'Class::DBI::AutoBase'; # we'll decide later what our real
+  use base 'Class::DBI::BaseDSN'; # we'll decide later what our real
                                    # parent class will be
   __PACKAGE__->set_db( Main => $ENV{TESTING} ? @test_dsn : @real_dsn );
 
 
 =head1 DESCRIPTION
 
-Class::DBI::AutoBase acts as a placeholder for a base class which will
+Class::DBI::BaseDSN acts as a placeholder for a base class which will
 be switched for a specific Class::DBI extension when you specify the
 dsn of the database to connect to.
 
-For example in this case, the Class::DBI::AutoBase will replace itself
+For example in this case, the Class::DBI::BaseDSN will replace itself
 with Class::DBI::mysql when the C<set_db> call is executed.
 
  package Example::DBI;
- use base 'Class::DBI::AutoBase';
+ use base 'Class::DBI::BaseDSN';
  __PACKAGE__->set_db( Main => 'dbi:mysql:example', 'user', 'pass' );
 
 Since this happens at runtime you could pass the dsn as a variable and
@@ -68,7 +68,7 @@ so have it use a completely different extension automatically.  This
 is especially useful for testing, or for applications where dsn may be
 a configuration option.
 
-If there is no matching extension found, Class::DBI::AutoBase replaces
+If there is no matching extension found, Class::DBI::BaseDSN replaces
 itself with Class::DBI.
 
 =head1 AUTHOR

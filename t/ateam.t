@@ -4,7 +4,7 @@ use lib qw(t/lib);
 use Test::More tests => 5;
 
 my $pkg;
-BEGIN { $pkg = 'Class::DBI::AutoBase' };
+BEGIN { $pkg = 'Class::DBI::BaseDSN' };
 use_ok( $pkg );
 package Foo;
 use base $pkg;
