@@ -1,4 +1,4 @@
-head
+1.22	Wednesday October 8th, 2003
 	Check that it's the thing we were importing that went boom,
 	not something *it* was importing. (rt.cpan.org #3982)
 

@@ -8,8 +8,7 @@ Module::Build
              'Test::More' => 0,
              'Class::DBI' => 0,
          },
-         create_makefile_pl => 'traditional',
-         sign => 1,
+         create_makefile_pl => 'passthrough',
        )
   ->create_build_script;
 

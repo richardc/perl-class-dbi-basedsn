@@ -1,7 +1,7 @@
 use strict;
 package Class::DBI::BaseDSN;
 use vars qw($VERSION);
-$VERSION = '1.21';
+$VERSION = '1.22';
 
 sub set_db {
     my $package = shift;
@@ -17,7 +17,11 @@ sub set_db {
     my $backend = "Class::DBI::$1";
 
     unless (eval "require $backend; 1") {
-        # Only quash error about the class we're pulling in
+        # Only quash "Can't locate" errors about the class we're pulling in.
+	# It may be that we have Class::DBI::$dsn but not something that it 
+	# in turn needs (yes, dependencies should fix that, but they don't 
+	# always: see rt.cpan.org#3982)
+
         my $file = $backend;
         $file =~ s{::}{/}g;
         $@ =~ /^Can't locate \Q$file\E\.pm / or die $@;
