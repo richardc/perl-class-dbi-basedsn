@@ -1,0 +1,7 @@
+MANIFEST
+META.yml
+SIGNATURE
+Makefile.PL
+Build.PL
+t/lib/Class/DBI/ATeam.pm
+t/lib/Class/DBI/CompileError.pm
