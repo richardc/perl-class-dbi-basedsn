@@ -17,11 +17,10 @@ sub set_db {
     my $backend = "Class::DBI::$1";
 
     unless (eval "require $backend; 1") {
-        ## Only quash error about the class we're pulling in
-        #my $file = $backend;
-        #$file =~ s{::}{/}g;
-        #$@ =~ /^Can't locate \Q$file\E\.pm / or die $@;
-        $@ =~ /^Can't locate / or die $@;
+        # Only quash error about the class we're pulling in
+        my $file = $backend;
+        $file =~ s{::}{/}g;
+        $@ =~ /^Can't locate \Q$file\E\.pm / or die $@;
 
         # if it simply wasn't there fall back to Class::DBI
         $backend = 'Class::DBI';
