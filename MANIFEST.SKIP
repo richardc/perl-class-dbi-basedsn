@@ -4,5 +4,4 @@ Makefile
 Build
 ~$
 t/test.db
-MANIFEST.SKIP
 \.svn
