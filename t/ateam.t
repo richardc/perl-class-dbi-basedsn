@@ -1,7 +1,7 @@
 #!perl -w
 use strict;
 use lib qw(t/lib);
-use Test::More tests => 5;
+use Test::More tests => 6;
 
 my $pkg;
 BEGIN { $pkg = 'Class::DBI::BaseDSN' };
@@ -29,3 +29,11 @@ eval { __PACKAGE__->set_db('Main', 'dbi:CompileError' ) };
 
 package main;
 like( $@, qr/^Global symbol "\$foo"/, 'error blows on compile error');
+
+package Quux;
+use base $pkg;
+eval { __PACKAGE__->set_db('Main', 'dbi:UpwardsCompileError' ) };
+
+package main;
+like( $@, qr/^Can't locate IfThisExistsThenWe\/reScrewed\.pm /, 
+     "don't hide upstream Can't locates.");
