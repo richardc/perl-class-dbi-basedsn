@@ -14,13 +14,17 @@ sub set_db {
     $dsn =~ m/^(?:dbi:)?([^:]+)/i
       or die "couldn't identify a backend from $dsn";
 
-    my $backend = "Class::DBI::$1";
+    my $driver = $1;
+    # let the special casing wars begin!
+    $driver = 'SQLite' if $driver eq 'SQLite2';
+
+    my $backend = "Class::DBI::$driver";
 
     unless (eval "require $backend; 1") {
         # Only quash "Can't locate" errors about the class we're pulling in.
-	# It may be that we have Class::DBI::$dsn but not something that it 
-	# in turn needs (yes, dependencies should fix that, but they don't 
-	# always: see rt.cpan.org#3982)
+        # It may be that we have Class::DBI::$dsn but not something that it
+        # in turn needs (yes, dependencies should fix that, but they don't
+        # always: see rt.cpan.org#3982)
 
         my $file = $backend;
         $file =~ s{::}{/}g;
